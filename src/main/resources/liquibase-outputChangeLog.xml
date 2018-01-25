@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="minhnhat (generated)" id="1516639443652-1">
+        <createTable tableName="group_variants">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="variant_name" type="VARCHAR(255)"/>
+            <column name="group_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-2">
+        <createTable tableName="order_items">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="price" type="VARCHAR(255)"/>
+            <column name="product_variant_id" type="BIGINT"/>
+            <column name="order_id" type="BIGINT"/>
+            <column name="product_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-3">
+        <createTable tableName="orders">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="city" type="VARCHAR(255)"/>
+            <column name="comment" type="VARCHAR(255)"/>
+            <column name="created" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="total_price" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="zip" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-4">
+        <createTable tableName="product_groups">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created" type="VARCHAR(255)"/>
+            <column name="group_name" type="VARCHAR(255)"/>
+            <column name="price" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-5">
+        <createTable tableName="product_images">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="path" type="VARCHAR(255)"/>
+            <column name="product_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-6">
+        <createTable tableName="products">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="price" type="VARCHAR(255)"/>
+            <column name="user_id" type="VARCHAR(255)"/>
+            <column name="group_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-7">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="access_token" type="VARCHAR(255)"/>
+            <column name="created" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-8">
+        <addUniqueConstraint columnNames="email" constraintName="UK_6dotkott2kjsp8vw4d0m25fb7" tableName="users"/>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-9">
+        <createIndex indexName="FK9an6554j5j7f3x8rifrgh4phr" tableName="products">
+            <column name="group_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-10">
+        <createIndex indexName="FKbioxgbv59vetrxe0ejfubep1w" tableName="order_items">
+            <column name="order_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-11">
+        <createIndex indexName="FKjggn49ydnd0a0lusxeuhqutlp" tableName="group_variants">
+            <column name="group_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-12">
+        <createIndex indexName="FKocimc7dtr037rh4ls4l95nlfi" tableName="order_items">
+            <column name="product_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-13">
+        <createIndex indexName="FKrftu5hh0vupk70occwy3rx8on" tableName="order_items">
+            <column name="product_variant_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-14">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="products" constraintName="FK9an6554j5j7f3x8rifrgh4phr" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="product_groups"/>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-15">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="order_items" constraintName="FKbioxgbv59vetrxe0ejfubep1w" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="orders"/>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-16">
+        <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="group_variants" constraintName="FKjggn49ydnd0a0lusxeuhqutlp" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="product_groups"/>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-17">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="order_items" constraintName="FKocimc7dtr037rh4ls4l95nlfi" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="products"/>
+    </changeSet>
+    <changeSet author="minhnhat (generated)" id="1516639443652-18">
+        <addForeignKeyConstraint baseColumnNames="product_variant_id" baseTableName="order_items" constraintName="FKrftu5hh0vupk70occwy3rx8on" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="group_variants"/>
+    </changeSet>
+</databaseChangeLog>
