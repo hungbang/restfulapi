@@ -23,12 +23,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private CustomAuthenticationFailureHandler authenticationFailureHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 .permitAll()
                 .loginPage("/login")
-                .failureUrl("/error")
+                .failureHandler(authenticationFailureHandler)
                 .defaultSuccessUrl("/profile");
         http.authorizeRequests()
                 .antMatchers("/register/**" ).permitAll()
