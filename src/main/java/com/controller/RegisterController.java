@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.entity.RegisterParam;
-import com.entity.UserEntity;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
