@@ -1,18 +1,20 @@
 package com.config;
 
-import com.DAO.UserDetailsDao;
+import com.dao.UserDetailsDao;
 import com.entity.UsersEntity;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.encoding.PlaintextPasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-@Component("authenticationProvider")
+//@Component("authenticationProvider")
 public class CheckLoginAuthenticationProvider extends DaoAuthenticationProvider {
     @Autowired
     UserDetailsDao userDetailsDao;
@@ -20,11 +22,15 @@ public class CheckLoginAuthenticationProvider extends DaoAuthenticationProvider 
     @Autowired
     UserService userService;
 
+
     @Autowired
     @Override
     public void setUserDetailsService(UserDetailsService userDetailsService) {
         super.setUserDetailsService(userDetailsService);
     }
+
+
+
 
     @Override
     public Authentication authenticate(Authentication authentication)
@@ -42,7 +48,7 @@ public class CheckLoginAuthenticationProvider extends DaoAuthenticationProvider 
         } catch (LockedException e){
             String error = "this user is locked";
             UsersEntity userAttempts =
-                    userService.findByUserName(authentication.getName());
+                    userService.getUserByEmail(authentication.getName());
 
             if(userAttempts!=null){
                 error = "User account is locked! <br><br>Username : "

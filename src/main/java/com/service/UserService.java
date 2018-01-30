@@ -7,5 +7,5 @@ public interface UserService {
     public int checkUser(UsersEntity user);
     void confirmRegistration(String token);
     boolean isUserExist(String userName);
-    UsersEntity findByUserName(String userName);
+    UsersEntity getUserByEmail(String userName);
 }

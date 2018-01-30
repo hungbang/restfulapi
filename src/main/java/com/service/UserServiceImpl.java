@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int checkUser(UsersEntity user) {
-        UsersEntity userEntity = userRepository.findByUsername(user.getEmail());
+        UsersEntity userEntity = userRepository.findByEmail(user.getEmail());
         if(userEntity == null)
             return -1;
         if(user.getPassword().equals(userEntity.getPassword())){
@@ -60,14 +60,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isUserExist(String userName) {
-        UsersEntity usersEntity = userRepository.findByUsername(userName);
+        UsersEntity usersEntity = userRepository.findByEmail(userName);
         if (usersEntity != null)
             return true;
         return false;
     }
 
+
     @Override
-    public UsersEntity findByUserName(String userName) {
-        return userRepository.findByUsername(userName);
+    public UsersEntity getUserByEmail(String userName) {
+        return userRepository.findByEmail(userName);
     }
 }

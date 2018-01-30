@@ -1,4 +1,4 @@
-package com.DAO;
+package com.dao;
 
 import com.entity.UsersEntity;
 import com.service.UserService;
@@ -16,7 +16,7 @@ public class UserDetailDaoImpl implements UserDetailsDao {
 
     @Override
     public void updateFailAttempts(String username) {
-        UsersEntity user = userService.findByUserName(username);
+        UsersEntity user = userService.getUserByEmail(username);
 
         if (user != null){
             if(user.getFailedLoginAttempts() +1 >= MAX_ATTEMPTS){
@@ -30,7 +30,7 @@ public class UserDetailDaoImpl implements UserDetailsDao {
 
     @Override
     public void resetFailAttempts(String username) {
-        UsersEntity user = userService.findByUserName(username);
+        UsersEntity user = userService.getUserByEmail(username);
 
         if(user != null){
             user.setFailedLoginAttempts(0);
