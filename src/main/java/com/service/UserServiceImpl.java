@@ -53,4 +53,8 @@ public class UserServiceImpl implements UserService {
         userEntity.setFailedLoginAttempts(userEntity.getFailedLoginAttempts()+1);
         return userEntity.getFailedLoginAttempts();
     }
+
+    public void confirmRegistration(String token) {
+
+    }
 }
