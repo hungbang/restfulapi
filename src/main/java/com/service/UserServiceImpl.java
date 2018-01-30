@@ -1,6 +1,6 @@
 package com.service;
 
-import com.entity.UserEntity;
+import com.entity.UsersEntity;
 import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,13 +12,13 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public void saveUser(UserEntity user) {
+    public void saveUser(UsersEntity user) {
         userRepository.save(user);
     }
 
     @Override
-    public int checkUser(UserEntity user) {
-        UserEntity userEntity = userRepository.findByUsername(user.getUsername());
+    public int checkUser(UsersEntity user) {
+        UsersEntity userEntity = userRepository.findByUsername(user.getEmail());
         if(userEntity == null)
             return -1;
         if(user.getPassword().equals(userEntity.getPassword())){

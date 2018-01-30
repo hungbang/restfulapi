@@ -1,8 +1,8 @@
 package com.service;
 
-import com.entity.UserEntity;
+import com.entity.UsersEntity;
 
 public interface UserService {
-    public void saveUser(UserEntity user);
-    public int checkUser(UserEntity user);
+    public void saveUser(UsersEntity user);
+    public int checkUser(UsersEntity user);
 }
