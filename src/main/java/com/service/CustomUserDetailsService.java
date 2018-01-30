@@ -1,6 +1,5 @@
 package com.service;
 
-
 import com.entity.CurrentUser;
 import com.entity.UsersEntity;
 import com.repository.UserRepository;
@@ -15,15 +14,15 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class UserDetailService implements UserDetailsService {
+@Service("userDetailsService")
+public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UsersEntity usersEntity = userRepository.findByUsername(username);
+        UsersEntity usersEntity = userRepository.findByEmail(username);
         if(usersEntity == null){
             throw new UsernameNotFoundException("User does not exist");
         }

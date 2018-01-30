@@ -8,4 +8,6 @@ public interface UserService {
     public int checkUser(UsersEntity user);
     void confirmRegistration(String token) throws TokenInvalidExeption;
     UsersEntity getUserById(int id);
+    boolean isUserExist(String userName);
+    UsersEntity getUserByEmail(String userName);
 }

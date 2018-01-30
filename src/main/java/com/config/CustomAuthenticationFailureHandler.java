@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Created by KAI on 1/25/18.
  */
-@Component("authenticationFailureHandler")
+@Component("customAuthenticationFailureHandler")
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
