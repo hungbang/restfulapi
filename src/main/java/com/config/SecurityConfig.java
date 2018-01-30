@@ -26,6 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private CustomAuthenticationFailureHandler authenticationFailureHandler;
 
+    @Autowired
+    private CheckLoginAuthenticationProvider authenticationProvider;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()

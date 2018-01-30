@@ -34,5 +34,4 @@ public class ProductsServiceImpl implements ProductsService {
     public void deleteProduct(ProductsEntity productsEntity) {
         productRepository.delete(productsEntity);
     }
-
 }
