@@ -23,18 +23,18 @@ public class RegisterController {
         return "register";
     }
 
-    @PostMapping("/register")
-    public RedirectView handleRegister(@ModelAttribute("user") RegisterParam registerParam){
-        String username = registerParam.getUserName();
-        String password = registerParam.getPassWord();
-        UserEntity user = new UserEntity(username, encoder.encode(password));
-
-        userService.saveUser(user);
-        return new RedirectView("/rest/login");
-    }
-
-    @GetMapping("/profile")
-    public String profile(){
-        return "profile";
-    }
+//    @PostMapping("/register")
+//    public RedirectView handleRegister(@ModelAttribute("user") RegisterParam registerParam){
+//        String username = registerParam.getUserName();
+//        String password = registerParam.getPassWord();
+//        UserEntity user = new UserEntity(username, encoder.encode(password));
+//
+//        userService.saveUser(user);
+//        return new RedirectView("/rest/login");
+//    }
+//
+//    @GetMapping("/profile")
+//    public String profile(){
+//        return "profile";
+//    }
 }
