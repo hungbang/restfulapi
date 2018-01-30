@@ -26,6 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private CustomAuthenticationFailureHandler authenticationFailureHandler;
 
+    @Autowired
+    private CheckLoginAuthenticationProvider authenticationProvider;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
@@ -46,15 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider
-                = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(encoder());
-        return authProvider;
+        auth.authenticationProvider(authenticationProvider);
     }
 
     @Bean

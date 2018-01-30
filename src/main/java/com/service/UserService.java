@@ -6,4 +6,6 @@ public interface UserService {
     public void saveUser(UsersEntity user);
     public int checkUser(UsersEntity user);
     void confirmRegistration(String token);
+    boolean isUserExist(String userName);
+    UsersEntity findByUserName(String userName);
 }
