@@ -1,9 +1,8 @@
 package com.service;
 
-<<<<<<< HEAD
+
 import com.entity.CurrentUser;
-=======
->>>>>>> origin/dev
+
 import com.entity.UsersEntity;
 import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
