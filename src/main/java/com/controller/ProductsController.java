@@ -4,12 +4,13 @@ import com.entity.ProductsEntity;
 import com.exception.ProductsNotFoundException;
 import com.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class ProductsController {
@@ -18,22 +19,28 @@ public class ProductsController {
     private ProductsService productsService;
 
     @RequestMapping(value = "/product",method = RequestMethod.GET)
-    public ModelAndView getAllProduct(){
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.addObject("products",productsService.findAll());
-        modelAndView.setViewName("productsList");
-        return modelAndView;
+    public ResponseEntity<List<ProductsEntity>> listAllProducts(){
+        List<ProductsEntity> productsEntities=productsService.findAll();
+        if(productsEntities.isEmpty()){
+            return new ResponseEntity<List<ProductsEntity>>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<ProductsEntity>>(productsEntities,HttpStatus.OK);
     }
-    @RequestMapping(value = "/product/edit/{id}",method = RequestMethod.GET)
-    public ModelAndView findProductById(@PathVariable("id") Integer id) throws ProductsNotFoundException {
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.addObject("product",productsService.getProductById(id));
-        modelAndView.setViewName("editProduct");
-        return modelAndView;
-    }
-    @RequestMapping(method = RequestMethod.PUT)
-    public String updateProduct(@ModelAttribute("product")ProductsEntity productsEntity){
-        productsService.updateProduct(productsEntity);
-        return "redirect:/product";
+    @RequestMapping(value ="/products/edit/{id}" ,method = RequestMethod.PUT)
+    public ResponseEntity<ProductsEntity> updateProduct(@PathVariable("id") int id,
+                                                        @RequestBody ProductsEntity productsEntity) throws ProductsNotFoundException {
+        System.out.print("Updating Product :" +id);
+        ProductsEntity currentProduct=productsService.getProductById(id);
+        if(currentProduct==null){
+            System.out.println("User with id :" + id + "not found");
+            return new ResponseEntity<ProductsEntity>(HttpStatus.NOT_FOUND);
+        }
+        currentProduct.setName(productsEntity.getName());
+        currentProduct.setDescription(productsEntity.getDescription());
+        currentProduct.setCreated(productsEntity.getCreated());
+        currentProduct.setPrice(productsEntity.getPrice());
+
+        productsService.updateProduct(currentProduct);
+        return new ResponseEntity<ProductsEntity>(currentProduct,HttpStatus.OK);
     }
 }
