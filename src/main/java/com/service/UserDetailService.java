@@ -1,5 +1,7 @@
 package com.service;
 
+import com.entity.CurrentUser;
+import com.entity.UsersEntity;
 import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,14 +22,14 @@ public class UserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity usersEntity = userRepository.findByUsername(username);
+        UsersEntity usersEntity = userRepository.findByUsername(username);
         if(usersEntity == null){
             throw new UsernameNotFoundException("User does not exist");
         }
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("Admin");
         grantedAuthorities.add(simpleGrantedAuthority);
-        CurrentUser currentUser = new CurrentUser(usersEntity.getUsername(), usersEntity.getPassword(), grantedAuthorities);
+        CurrentUser currentUser = new CurrentUser(usersEntity.getEmail(), usersEntity.getPassword(), grantedAuthorities);
 
         return currentUser;
     }
