@@ -57,4 +57,17 @@ public class UserServiceImpl implements UserService {
     public void confirmRegistration(String token) {
 
     }
+
+    @Override
+    public boolean isUserExist(String userName) {
+        UsersEntity usersEntity = userRepository.findByUsername(userName);
+        if (usersEntity != null)
+            return true;
+        return false;
+    }
+
+    @Override
+    public UsersEntity findByUserName(String userName) {
+        return userRepository.findByUsername(userName);
+    }
 }
