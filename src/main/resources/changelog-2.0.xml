@@ -1,0 +1,14 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="liquibase-docs" id="addColumn-example">
+        <addColumn schemaName="spring-hateoas"
+                   tableName="users">
+            <column name="accountNonExpired" type="BOOLEAN"/>
+            <column name="accountNonLocked" type="BOOLEAN"/>
+            <column name="credentialsNonExpired" type="BOOLEAN"/>
+            <column name="enabled" type="BOOLEAN"/>
+            <column name="last_updated_at" type="VARCHAR(255)" />
+            <column name="version" type="INT(11)"/>
+            <column name="failedLoginAttempts" type="INT(11)" />
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>
