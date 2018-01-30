@@ -1,6 +1,9 @@
 package com.service;
 
+<<<<<<< HEAD
 import com.entity.CurrentUser;
+=======
+>>>>>>> origin/dev
 import com.entity.UsersEntity;
 import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service()
+@Service
 public class UserDetailService implements UserDetailsService {
 
     @Autowired
