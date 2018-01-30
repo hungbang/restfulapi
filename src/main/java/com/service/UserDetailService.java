@@ -1,5 +1,6 @@
 package com.service;
 
+import com.entity.UsersEntity;
 import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service()
+@Service
 public class UserDetailService implements UserDetailsService {
 
     @Autowired
@@ -20,7 +21,7 @@ public class UserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity usersEntity = userRepository.findByUsername(username);
+        UsersEntity usersEntity = userRepository.findByUsername(username);
         if(usersEntity == null){
             throw new UsernameNotFoundException("User does not exist");
         }

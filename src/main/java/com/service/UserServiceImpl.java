@@ -34,4 +34,11 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         emailService.sendMailConfirmation(user);
     }
+
+    @Override
+    public void confirmRegistration(String token) {
+
+    }
+
+
 }

@@ -1,7 +1,6 @@
-package com.service.impl;
+package com.service;
 
 import com.entity.UsersEntity;
-import com.service.EmailService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
@@ -38,8 +37,9 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendMailConfirmation(UsersEntity user) {
-        String token = "1234567asd";
+        String token = "123123123123asdasd";
         String link = "http://localhosT:8080/confirm?token=" + token;
         sendSimpleMessage(user.getEmail(),"Register Confirmation", link);
     }
 }
+
