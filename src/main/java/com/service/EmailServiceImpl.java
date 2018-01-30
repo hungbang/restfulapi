@@ -1,6 +1,7 @@
 package com.service;
 
 import com.entity.UsersEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,9 @@ import java.util.Properties;
 
 @Service
 public class EmailServiceImpl implements EmailService {
+
+    @Autowired
+    JwtTokenService jwtTokenService;
 
     public JavaMailSenderImpl getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
@@ -37,7 +41,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendMailConfirmation(UsersEntity user) {
-        String token = "123123123123asdasd";
+        String token = jwtTokenService.getToken(user);
         String link = "http://localhosT:8080/confirm?token=" + token;
         sendSimpleMessage(user.getEmail(),"Register Confirmation", link);
     }
