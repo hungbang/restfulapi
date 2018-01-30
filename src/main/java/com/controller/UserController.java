@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.entity.UsersEntity;
+import com.exception.TokenInvalidExeption;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/confirm")
-    public ResponseEntity<?> emailConfirm(@RequestParam String token)  {
+    public ResponseEntity<?> emailConfirm(@RequestParam String token) throws TokenInvalidExeption {
         userService.confirmRegistration(token);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }

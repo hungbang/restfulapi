@@ -1,8 +1,10 @@
 package com.service;
 
 import com.entity.UsersEntity;
+import com.exception.TokenInvalidExeption;
 import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
@@ -19,8 +21,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     EmailService emailService;
 
+    @Autowired
+    JwtTokenService jwtTokenService;
+
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Override
     public void saveUser(UsersEntity user) {
+        user.setPassword(encoder.encode(user.getPassword()));
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setEnabled(false);
@@ -54,7 +63,19 @@ public class UserServiceImpl implements UserService {
         return userEntity.getFailedLoginAttempts();
     }
 
-    public void confirmRegistration(String token) {
+    public void confirmRegistration(String token) throws TokenInvalidExeption {
+        String userId = jwtTokenService.verifyToken(token);
+        UsersEntity user = getUserById(Integer.parseInt(userId));
+        if(user == null) {
+            throw new TokenInvalidExeption("Token Invalid");
+        }
+        user.setAccessToken(token);
+        user.setEnabled(true);
+        saveUser(user);
+    }
 
+    @Override
+    public UsersEntity getUserById(int id) {
+        return userRepository.findOne(id);
     }
 }
