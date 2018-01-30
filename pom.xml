@@ -110,6 +110,13 @@
             <artifactId>spring-boot-starter-mail</artifactId>
             <version>1.4.3.RELEASE</version>
         </dependency>
+
+        <!--JwtToken-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
     </dependencies>
 
     <!--<build>-->
@@ -172,6 +179,5 @@
 
         </plugins>
     </build>
-
 
 </project>
