@@ -10,7 +10,7 @@ public class ResponeErrorMessage {
         this.code = code;
     }
 
-    public HttpStatus getCode() {
+    public HttpStatus getCode(HttpStatus badRequest) {
         return code;
     }
 

@@ -12,13 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class ProductsController {
 
     @Autowired
     private ProductsService productsService;
 
-    @RequestMapping(value = "/product",method = RequestMethod.GET)
+    @RequestMapping(value = "/rest/protected/v1.0/api/products",method = RequestMethod.GET)
     public ResponseEntity<List<ProductsEntity>> listAllProducts(){
         List<ProductsEntity> productsEntities=productsService.findAll();
         if(productsEntities.isEmpty()){
@@ -26,7 +26,7 @@ public class ProductsController {
         }
         return new ResponseEntity<List<ProductsEntity>>(productsEntities,HttpStatus.OK);
     }
-    @RequestMapping(value ="/products/edit/{id}" ,method = RequestMethod.PUT)
+    @RequestMapping(value ="/rest/protected/v1.0/api/products/edit/{id}" ,method = RequestMethod.PUT)
     public ResponseEntity<ProductsEntity> updateProduct(@PathVariable("id") int id,
                                                         @RequestBody ProductsEntity productsEntity) throws ProductsNotFoundException {
         System.out.print("Updating Product :" +id);
