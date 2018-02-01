@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +25,6 @@ public class ProductImageController {
 
     @Autowired
     private ProductImageService productImageService;
-
     @RequestMapping(value = "/protected/v1.0/api/upload",method = RequestMethod.POST)
     public ResponseEntity<?> UploadImage(@RequestParam("file")MultipartFile file, HttpServletRequest request) throws IOException{
         LOGGER.info("func UploadImage() called");
