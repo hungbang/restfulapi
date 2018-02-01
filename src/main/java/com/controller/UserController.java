@@ -14,7 +14,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/rest/protected/v1.0/api/register")
+    @PostMapping("/public/v1.0/api/register")
     public ResponseEntity<?> addUser(@RequestBody UsersEntity user) {
         if(user == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -23,7 +23,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/confirm")
+    @GetMapping("/protected/v1.0/api/confirm")
     public ResponseEntity<?> emailConfirm(@RequestParam String token) throws TokenInvalidExeption {
         userService.confirmRegistration(token);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();

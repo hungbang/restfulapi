@@ -36,9 +36,9 @@ public class UserServiceImpl implements UserService {
         user.setCredentialsNonExpired(true);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
-        user.setCreated(dateFormat.format(cal));
-        user.setLastUpdatedAt(dateFormat.format(cal));
+        Date date = new Date();
+        user.setCreated(dateFormat.format(date));
+        user.setLastUpdatedAt(dateFormat.format(date));
 
         userRepository.save(user);
         emailService.sendMailConfirmation(user);
@@ -71,6 +71,9 @@ public class UserServiceImpl implements UserService {
         }
         user.setAccessToken(token);
         user.setEnabled(true);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        user.setLastUpdatedAt(dateFormat.format(date));
         saveUser(user);
     }
 
