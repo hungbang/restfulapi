@@ -1,11 +1,13 @@
 package com.service;
 
 import com.entity.ProductsEntity;
+import com.exception.ProductsNotFoundException;
 
 import java.util.List;
 
 public interface ProductsService {
 
-    ProductsEntity getProductById(int id);
-
+    List<ProductsEntity> findAll();
+    ProductsEntity getProductById(int id) throws ProductsNotFoundException;
+    public void updateProduct(ProductsEntity productsEntity);
 }

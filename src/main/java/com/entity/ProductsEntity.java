@@ -3,37 +3,28 @@ package com.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="products")
+@Table(name = "products", schema = "spring-hateoas", catalog = "")
 public class ProductsEntity {
-    private Integer id;
+    private long id;
     private String created;
     private String description;
     private String name;
     private String price;
-    private String user_id;
-    private String group_id;
-
-    public ProductsEntity(Integer id, String created, String description, String name, String price, String user_id, String group_id) {
-        this.id = id;
-        this.created = created;
-        this.description = description;
-        this.name = name;
-        this.price = price;
-        this.user_id = user_id;
-        this.group_id = group_id;
-    }
+    private String userId;
+    private Long groupId;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id",nullable = false,unique = true)
-    public Integer getId() {
+    @Column(name = "id")
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
-    @Column(name="created",nullable = false,unique = true)
+
+    @Basic
+    @Column(name = "created")
     public String getCreated() {
         return created;
     }
@@ -41,7 +32,9 @@ public class ProductsEntity {
     public void setCreated(String created) {
         this.created = created;
     }
-    @Column(name="description",nullable = false,unique = true)
+
+    @Basic
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -49,7 +42,9 @@ public class ProductsEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    @Column(name="name",nullable = false,unique = true)
+
+    @Basic
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -57,7 +52,9 @@ public class ProductsEntity {
     public void setName(String name) {
         this.name = name;
     }
-    @Column(name="price",nullable = false,unique = true)
+
+    @Basic
+    @Column(name = "price")
     public String getPrice() {
         return price;
     }
@@ -65,33 +62,54 @@ public class ProductsEntity {
     public void setPrice(String price) {
         this.price = price;
     }
-    @Column(name = "user_id",nullable = false,unique = true)
-    public String getUser_id() {
-        return user_id;
+
+    @Basic
+    @Column(name = "user_id")
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-    @Column(name = "group_id",nullable = false,unique = true)
-    public String getGroup_id() {
-        return group_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public void setGroup_id(String group_id) {
-        this.group_id = group_id;
+    @Basic
+    @Column(name = "group_id")
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 
     @Override
-    public String toString() {
-        return "ProductsEntity{" +
-                "id=" + id +
-                ", created='" + created + '\'' +
-                ", description='" + description + '\'' +
-                ", name='" + name + '\'' +
-                ", price='" + price + '\'' +
-                ", user_id='" + user_id + '\'' +
-                ", group_id='" + group_id + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProductsEntity that = (ProductsEntity) o;
+
+        if (id != that.id) return false;
+        if (created != null ? !created.equals(that.created) : that.created != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (price != null ? !price.equals(that.price) : that.price != null) return false;
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        if (groupId != null ? !groupId.equals(that.groupId) : that.groupId != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (created != null ? created.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (price != null ? price.hashCode() : 0);
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (groupId != null ? groupId.hashCode() : 0);
+        return result;
     }
 }

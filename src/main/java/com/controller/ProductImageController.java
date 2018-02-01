@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,14 +25,12 @@ public class ProductImageController {
 
     @Autowired
     private ProductImageService productImageService;
-
-    @RequestMapping(value = "/",method = RequestMethod.POST)
-    public ResponseEntity<?> UploadImage(@RequestParam("file")MultipartFile file) throws IOException{
+    @RequestMapping(value = "/protected/v1.0/api/upload",method = RequestMethod.POST)
+    public ResponseEntity<?> UploadImage(@RequestParam("file")MultipartFile file, HttpServletRequest request) throws IOException{
         LOGGER.info("func UploadImage() called");
         if(file.isEmpty()){
             throw new RuntimeException();
         }
-
         byte[] bytes=file.getBytes();
         Path path = Paths.get(UPLOADED_FOLDER +file.getOriginalFilename());
         String pathName=file.getOriginalFilename();
