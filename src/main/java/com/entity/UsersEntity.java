@@ -3,7 +3,7 @@ package com.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users", schema = "spring-hateoas", catalog = "")
+@Table(name = "users", schema = "spring-hateoas")
 public class UsersEntity {
     private int id;
     private String accessToken;
@@ -129,7 +129,7 @@ public class UsersEntity {
         this.lastUpdatedAt = lastUpdatedAt;
     }
 
-    @Basic
+    @Version
     @Column(name = "version")
     public Integer getVersion() {
         return version;
